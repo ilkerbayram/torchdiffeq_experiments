@@ -1,3 +1,12 @@
+#!/usr/bin/env python
+"""
+this module contains functions necessary to set up
+some basic experiments with torchdiffeq
+
+ilker bayram, ibayram@ieee.org, 2021
+"""
+
+import os
 import torch
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
@@ -43,3 +52,16 @@ class approx_dynamics(nn.Module):
         for layer in self.layers[:-1]:
             x = torch.tanh(layer(x))
         return self.layers[-1](x)
+
+
+def wrap_savefig(func, **params):
+    """
+    decorator for matplotlib.pyplot.savefig
+    """
+
+    def wrapper(*args, **kwargs):
+        # save figures under the figures directory
+        fname = os.path.join("..", "figures", args[0])
+        func(fname, *args[1:], **kwargs, **params)
+
+    return wrapper
