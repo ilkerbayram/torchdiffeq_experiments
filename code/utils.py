@@ -9,11 +9,11 @@ ilker bayram, ibayram@ieee.org, 2021
 import os
 import torch
 import torch.nn as nn
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset
 import numpy as np
 
 
-class my_dataset(Dataset):
+class OdeDataset(Dataset):
     def __init__(self, solutions, win) -> None:
         super().__init__()
         self.y = [torch.flatten(torch.from_numpy(sol.y)) for sol in solutions]
@@ -37,8 +37,8 @@ class my_dataset(Dataset):
         )
 
 
-class approx_dynamics(nn.Module):
-    def __init__(self, architecture: list = [100, 100]):
+class ApproxDynamics(nn.Module):
+    def __init__(self, architecture: list = [200, 50]):
         super().__init__()
         new_arc = [1, *architecture, 1]
         self.layers = nn.ModuleList(
