@@ -15,11 +15,11 @@ where $f_{\Theta} : \mathbb{R} \to \mathbb{R}$ is a parametric function that var
 In practice, the function $x$ can be computed numerically using an integrator like `scipy`'s `solve_ivp`.
 
 While the notation does not suggest it, notice that $x(t)$ depends on $\Theta$. Therefore, for a given initial value we can change the behavior of $x(t)$ by varying $\Theta$. Ignoring issues on existence, we can also talk about the derivative of $x(t)$ with respect to $\Theta$, for each value of $t$, namely
-$$\tag{*}
+$$
 \frac{\partial}{\partial \Theta} x(t).
 $$
 
-`torchdiffeq` provides an efficient numerical procedure that relies on the **adjoint method** to obtain the derivative (*).
+`torchdiffeq` provides an efficient numerical procedure that relies on the **adjoint method** to obtain the derivative above.
 
 ## `torchdiffeq` in Action
 Let us now discover how we can use this derivative to approximate a nonlinear ODE.
